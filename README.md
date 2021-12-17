@@ -162,3 +162,10 @@ response => {
 # GET => /api/logout
 
 response => status 200
+
+# Required environment variables
+
+DB_CONNECTION_STRING = "mongodb://localhost/edu-quiz"
+DB_ERROR_LOGS = "mongodb://localhost/edu-quiz-logs"
+NODE_ENV = "development"
+JWTPrivateKey = "JSON web token private key"
