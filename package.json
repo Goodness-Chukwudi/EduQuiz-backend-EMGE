@@ -1,0 +1,36 @@
+{
+  "name": "eduquiz-app",
+  "version": "1.0.0",
+  "description": "A CBT application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Goodness-Chukwudi/EduQuiz-backend.git"
+  },
+  "author": "Goodness_Chukwudi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Goodness-Chukwudi/EduQuiz-backend/issues"
+  },
+  "homepage": "https://github.com/Goodness-Chukwudi/EduQuiz-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "cookie": "^0.4.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^4.6.0",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.0",
+    "nodemon": "^2.0.15",
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.7"
+  }
+}
