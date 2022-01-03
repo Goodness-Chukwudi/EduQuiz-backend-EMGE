@@ -1,19 +1,9 @@
 "use strict";
+
 const express = require("express"),
 	router = express(),
-	cookie = require("cookie");
+	userController = require("../controllers/user");
 
-router.get("/", async (req, res) => {
-	res.setHeader(
-		"Set-Cookie",
-		cookie.serialize("eduQuiz-sessionCookie-content", "", {
-			httpOnly: true,
-			sameSite: "none",
-			secure: true,
-			maxAge: 1,
-		})
-	);
-	res.status(200).send("Bye");
-});
+router.get("/", userController.logout);
 
 module.exports = router;

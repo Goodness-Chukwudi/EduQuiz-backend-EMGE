@@ -1,7 +1,6 @@
 "use strict";
 
-const Joi = require("joi"),
-	mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
 	userId: {
@@ -36,13 +35,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-const joiUser = Joi.object({
-	userId: Joi.string().email().required(),
-	password: Joi.string().required(),
-});
-
-function validate(input) {
-	return joiUser.validate(input, { convert: false });
-}
-
-module.exports = { User, validate };
+module.exports = User;

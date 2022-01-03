@@ -1,6 +1,6 @@
 "use strict";
 
-const { saveResult } = require("../data/storage/result");
+const { saveResult } = require("../model/storage/result");
 
 module.exports = async (quiz) => {
 	for (let i = 0; i < quiz.questions.length; i++) {

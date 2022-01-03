@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = {
+const question = {
 	num: {
 		type: Number,
 		required: true,
@@ -31,3 +31,5 @@ module.exports = {
 		required: true,
 	},
 };
+
+module.exports = question;

@@ -2,12 +2,15 @@
 
 const cors = require("cors");
 
-module.exports = () => {
+const corsSettings = () => {
 	const corsOptions = {
-		origin: "http://127.0.0.1:5500",
+		origin: "https://127.0.0.1:5500" || true,
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
-		credentials: true, //access-control-allow-credentials:true
+		allowedHeaders: ["Date", "Content-Type"],
+		credentials: true,
 		optionSuccessStatus: 200,
 	};
 	return cors(corsOptions);
 };
+
+module.exports = corsSettings;

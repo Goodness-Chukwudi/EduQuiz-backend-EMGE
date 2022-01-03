@@ -1,7 +1,7 @@
 "use strict";
 
-const { saveResult, getAnswers } = require("../data/storage/result"),
-	{ getUser, updateResultList } = require("../data/storage/user");
+const { saveResult, getAnswers } = require("../model/storage/result"),
+	{ updateResultList } = require("../model/storage/user");
 
 let map = new Map(),
 	completedQuiz = new Map(),
@@ -41,13 +41,13 @@ function manageTime(quizList, isFirst = false) {
 }
 
 function manageQuiz(quizList) {
-	quizList.forEach((quiz, user) => {
+	quizList.forEach((quiz, userId) => {
 		//if quiz is timed out, add to list of completed quizzes
 		if (quiz.timeLeft <= 0) {
-			completedQuiz.set(user, quiz);
+			completedQuiz.set(userId, quiz);
 		} else {
 			quiz.timeLeft--;
-			quizList.set(user, quiz);
+			quizList.set(userId, quiz);
 		}
 	});
 
@@ -83,9 +83,7 @@ function computeResult(result, answers, userId) {
 	//Save the updated result and add the result id to the user info
 	saveResult(result).then(() => {
 		/*add the result id to user details*/
-		getUser(userId).then((user) => {
-			updateResultList(result, user);
-		});
+		updateResultList(result, userId);
 	});
 }
 

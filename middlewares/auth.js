@@ -2,15 +2,18 @@
 
 const Token = require("../utils/token");
 
-module.exports = async (req, res, next) => {
+const authentication = async (req, res, next) => {
 	const token = req.cookies["eduQuiz-sessionCookie-content"];
-	if (!token) res.status(401).send("Access denied! Please login to continue");
+	if (!token)
+		return res.status(401).send("Access denied! Please login to continue");
 
 	const { user, error } = await Token.verify(token);
-	if (error) res.status(400).send("Access denied! Bad token");
+	if (error) return res.status(400).send("Access denied! Bad token");
 
 	if (user) {
 		req.user = user;
 		next();
 	} else res.status(400).send("Access denied! this user does not exist!");
 };
+
+module.exports = authentication;

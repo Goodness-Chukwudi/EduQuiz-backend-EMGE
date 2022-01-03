@@ -1,7 +1,7 @@
 "use strict";
 
-const Result = require("../model/result"),
-	{ Quiz } = require("../model/quiz");
+const Result = require("../result"),
+	Quiz = require("../quiz");
 
 async function saveResult(input) {
 	return await new Result(input).save();
@@ -9,6 +9,7 @@ async function saveResult(input) {
 
 async function getAnswers(id) {
 	const value = await Quiz.findById(id).select({ questions: 1 });
+	//return value;
 	return value.questions;
 }
 

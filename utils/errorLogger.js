@@ -3,7 +3,7 @@
 const winston = require("winston");
 require("winston-mongodb");
 
-module.exports = function (err) {
+const errorLogger = (err) => {
 	if (process.env.NODE_ENV != "production") {
 		winston.add(
 			new winston.transports.Console({
@@ -39,3 +39,5 @@ module.exports = function (err) {
 		});
 	}
 };
+
+module.exports = errorLogger;
