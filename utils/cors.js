@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const corsSettings = () => {
 	const corsOptions = {
-		origin: "https://127.0.0.1",
+		origin: "https://127.0.0.1:5500",
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
 		allowedHeaders: [
 			"Date",
