@@ -4,9 +4,14 @@ const cors = require("cors");
 
 const corsSettings = () => {
 	const corsOptions = {
-		origin: "https://127.0.0.1:5500" || true,
+		origin: "https://dashboard.heroku.com/apps/eduquizng",
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
-		allowedHeaders: ["Date", "Content-Type"],
+		allowedHeaders: [
+			"Date",
+			"Content-Type",
+			"Access-Control-Allow-Headers",
+			"Origin",
+		],
 		credentials: true,
 		optionSuccessStatus: 200,
 	};

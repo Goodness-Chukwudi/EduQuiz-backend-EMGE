@@ -15,7 +15,7 @@ const register = async (req, res) => {
 	user = await saveUser(user);
 
 	//generate token and send as cookie
-	res = await setTokenCookie(res, user);
+	res = await setCookie(res, user);
 
 	//send back user without password
 	user.password = "";
