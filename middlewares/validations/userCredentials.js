@@ -2,16 +2,25 @@ const Joi = require("joi"),
 	xss = require("xss");
 
 const credentials = async (req, res, next) => {
-	const login = Joi.object({
-		userId: Joi.string().email().required(),
-		password: Joi.string().alphanum().min(8).required(),
-	});
+	let credentials;
+	// check if the request is for signup (contains confirmPassword) or for login
+	if (req.body.confirmPassword) {
+		credentials = Joi.object({
+			userId: Joi.string().email().required(),
+			password: Joi.string().alphanum().min(8).required(),
+			confirmPassword: Joi.ref("password"),
+		});
+	} else {
+		credentials = Joi.object({
+			userId: Joi.string().email().required(),
+			password: Joi.string().alphanum().min(8).required(),
+		});
+	}
 
-	const { error } = login.validate(req.body, { convert: false });
+	const { error } = credentials.validate(req.body, { convert: false });
+	if (error) return res.status(400).send(error.details[0].message);
 
 	sanitizeInput();
-
-	if (error) return res.status(400).send(error.details[0].message);
 	next();
 
 	function sanitizeInput() {

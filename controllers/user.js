@@ -30,7 +30,7 @@ const login = async (req, res) => {
 	if (!valid) return res.status(401).send("Invalid email or password!");
 
 	//generate token and send as cookie
-	res = await setTokenCookie(res, user);
+	res = await setCookie(res, user);
 
 	//send back user without password
 	user.password = "";
@@ -47,7 +47,7 @@ const logout = (req, res) => {
 			maxAge: 1,
 		})
 	);
-	res.status(200).send("Logged out");
+	res.status(200).end();
 };
 
 const send = (req, res) => {
@@ -57,7 +57,7 @@ const send = (req, res) => {
 	} else res.status(400).send("Error! User not found!");
 };
 
-async function setTokenCookie(res, user) {
+async function setCookie(res, user) {
 	const token = await Token.generate(user);
 	res.setHeader(
 		"Set-Cookie",

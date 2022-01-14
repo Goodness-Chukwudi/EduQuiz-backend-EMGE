@@ -8,10 +8,9 @@ const validateQuizId = async (req, res, next) => {
 		.message("Enter a valid quiz ID");
 
 	const { error } = quizId.validate(req.params.quizId, { convert: false });
+	if (error) return res.status(400).send(error.details[0].message);
 
 	sanitizeInput();
-
-	if (error) return res.status(400).send(error.details[0].message);
 	next();
 
 	function sanitizeInput() {

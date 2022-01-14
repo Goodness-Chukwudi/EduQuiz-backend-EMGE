@@ -10,10 +10,10 @@ const answerUpdate = (req, res, next) => {
 		isCompleted: Joi.boolean().required(),
 	});
 
-	sanitizeInput();
-
 	const { error } = answerUpdate.validate(req.body, { convert: false });
 	if (error) return res.status(400).send(error.details[0].message);
+
+	sanitizeInput();
 	next();
 
 	function sanitizeInput() {

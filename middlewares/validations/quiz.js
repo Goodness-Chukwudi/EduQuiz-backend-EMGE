@@ -21,10 +21,10 @@ const validateQuiz = async (req, res, next) => {
 			.required(),
 	});
 
-	sanitizeInput();
-
 	const { error } = quiz.validate(req.body, { convert: false });
 	if (error) return res.status(400).send(error.details[0].message);
+
+	sanitizeInput();
 	next();
 
 	function sanitizeInput() {

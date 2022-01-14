@@ -7,7 +7,8 @@ function Token() {
 	this.generate = async (user) => {
 		return await jwt.sign(
 			{ _id: user._id, userId: user.userId },
-			process.env.JWTPrivateKey
+			process.env.JWTPrivateKey,
+			{ expiresIn: "1d" }
 		);
 	};
 
