@@ -12,8 +12,8 @@ const credentials = async (req, res, next) => {
 		});
 	} else {
 		credentials = Joi.object({
-			userId: Joi.string().email().required(),
-			password: Joi.string().alphanum().min(8).required(),
+			userId: Joi.string().required(),
+			password: Joi.string().required(),
 		});
 	}
 
