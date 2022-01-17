@@ -4,6 +4,7 @@ const Token = require("../utils/token");
 
 const authentication = async (req, res, next) => {
 	const token = req.cookies["eduQuiz-sessionCookie-content"];
+	console.log(token);
 	if (!token)
 		return res.status(401).send("Access denied! Please login to continue");
 
