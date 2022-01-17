@@ -41,7 +41,7 @@ const logout = (req, res) => {
 	res.setHeader(
 		"Set-Cookie",
 		cookie.serialize("eduQuiz-sessionCookie-content", "", {
-			httpOnly: true,
+			httpOnly: false,
 			sameSite: "none",
 			secure: true,
 			maxAge: 1,
@@ -62,7 +62,7 @@ async function setCookie(res, user) {
 	res.setHeader(
 		"Set-Cookie",
 		cookie.serialize("eduQuiz-sessionCookie-content", token, {
-			httpOnly: true,
+			httpOnly: false,
 			sameSite: "none",
 			secure: true,
 			maxAge: 60 * 60 * 1000,
