@@ -34,6 +34,7 @@ const login = async (req, res) => {
 
 	//send back user without password
 	user.password = "";
+	console.log(res);
 	res.status(200).send(user);
 };
 
