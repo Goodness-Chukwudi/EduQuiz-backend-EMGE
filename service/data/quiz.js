@@ -1,6 +1,6 @@
 "use strict";
 
-const Quiz = require("../quiz");
+const Quiz = require("../../model/quiz");
 
 async function saveQuiz(input) {
 	return await new Quiz(input).save();

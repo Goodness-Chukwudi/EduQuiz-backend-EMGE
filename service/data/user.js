@@ -1,6 +1,6 @@
 "use strict";
 
-const User = require("../user");
+const User = require("../../model/user");
 
 async function updateQuizList(quiz, userId) {
 	let user = await getUser(userId);
@@ -29,14 +29,6 @@ async function updateResultList(result, userId) {
 	quiz.candidates++;
 	user.save();
 	return quiz.candidates;
-
-	// user.quizzes.forEach((quiz) => {
-	// 	if (quiz.id === result.quizId) {
-	// 		quiz.candidates++;
-	// 		user.save();
-	// 		return quiz.candidates;
-	// 	}
-	// });
 }
 
 async function getUser(id) {

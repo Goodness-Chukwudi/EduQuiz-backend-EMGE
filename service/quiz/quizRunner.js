@@ -1,13 +1,13 @@
 "use strict";
 
-const { saveResult, getAnswers } = require("../model/storage/result"),
-	{ updateResultList } = require("../model/storage/user");
+const { getAnswers } = require("../data/result"),
+	computeResult = require("./resultProcessor");
 
 let map = new Map(),
 	completedQuiz = new Map(),
 	intervalId;
 
-function RunQuiz() {
+function QuizRunner() {
 	this.activeQuizzes = map;
 
 	this.addQuiz = (quiz, userId) => {
@@ -71,20 +71,4 @@ function endQuiz() {
 	manageTime(RunQuiz.activeQuizzes);
 }
 
-function computeResult(result, answers, userId) {
-	result.questions.map((question, i) => {
-		if (question.answer !== answers[i].answer) question.score = 0;
-		result.questions[i] = question;
-		result.totalScore += question.score;
-	});
-
-	result.isSubmitted = true;
-
-	//Save the updated result and add the result id to the user info
-	saveResult(result).then(() => {
-		/*add the result id to user details*/
-		updateResultList(result, userId);
-	});
-}
-
-module.exports = new RunQuiz();
+module.exports = new QuizRunner();

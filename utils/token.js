@@ -1,7 +1,7 @@
 "use strict";
 
 const jwt = require("jsonwebtoken"),
-	{ getUser } = require("../model/storage/user");
+	{ getUser } = require("../service/data/user");
 
 function Token() {
 	this.generate = async (user) => {

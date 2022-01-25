@@ -1,7 +1,7 @@
 "use strict";
 
-const Result = require("../result"),
-	Quiz = require("../quiz");
+const Result = require("../../model/result"),
+	Quiz = require("../../model/quiz");
 
 async function saveResult(input) {
 	return await new Result(input).save();

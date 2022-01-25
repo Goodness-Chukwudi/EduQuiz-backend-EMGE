@@ -1,9 +1,9 @@
 "use strict";
 
-const { saveQuiz, getQuiz } = require("../model/storage/quiz"),
-	{ updateQuizList } = require("../model/storage/user"),
-	createResult = require("./createResult"),
-	runningQuiz = require("./runningQuiz");
+const { saveQuiz, getQuiz } = require("../service/data/quiz"),
+	{ updateQuizList } = require("../service/data/user"),
+	resultController = require("./result"),
+	QuizRunner = require("../service/quiz/quizRunner");
 
 const create = async (req, res) => {
 	const quiz = await saveQuiz(req.body);
@@ -25,14 +25,14 @@ const start = async (req, res) => {
 	const quiz = await getQuiz(quizId);
 	if (quiz) {
 		//create a result object with no answer from the quiz and send it to the user
-		let result = await createResult(quiz);
+		let result = await resultController.create(quiz);
 		res.status(200).send(result);
-		runningQuiz.addQuiz(result, req.user.userId);
+		QuizRunner.addQuiz(result, req.user.userId);
 	} else res.status(400).send("Invalid quiz Id");
 };
 
 const update = (req, res) => {
-	runningQuiz.updateQuiz(req.body, req.user.userId);
+	QuizRunner.updateQuiz(req.body, req.user.userId);
 	res.status(200).send("Success");
 };
 

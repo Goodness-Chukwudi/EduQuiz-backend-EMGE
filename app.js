@@ -10,7 +10,11 @@ const express = require("express"),
 	log = require("./utils/errorLogger"),
 	cors = require("./utils/cors"),
 	compression = require("compression"),
-	helmet = require("helmet");
+	helmet = require("helmet"),
+	registerRoute = require("./routes/register"),
+	loginRoute = require("./routes/login"),
+	quizRoute = require("./routes/quiz"),
+	logoutRoute = require("./routes/logout");
 
 require("express-async-errors");
 
@@ -21,10 +25,10 @@ app.use(helmet());
 app.use(compression());
 
 //route handlers
-app.use("/api/register", require("./routes/register"));
-app.use("/api/login", require("./routes/login"));
-app.use("/api/quiz", auth, require("./routes/quiz"));
-app.use("/api/logout", require("./routes/logout"));
+app.use("/api/register", registerRoute);
+app.use("/api/login", loginRoute);
+app.use("/api/quiz", auth, quizRoute);
+app.use("/api/logout", logoutRoute);
 
 // Error handlers and loggers
 app.use(require("./middlewares/errorHandler"));
@@ -41,16 +45,21 @@ process.on("uncaughtException", (err) => {
 });
 
 // Connect to DB
-try {
-	mongoose.connect(process.env.DB_CONNECTION_STRING, {
+let connectedToDB = false;
+mongoose
+	.connect(process.env.DB_CONNECTION_STRING, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+	})
+	.then((result) => {
+		connectedToDB = result;
+	})
+	.catch((error) => {
+		console.log(error);
 	});
-} catch (error) {
-	throw error;
-}
 
 const port = process.env.PORT || 5500;
-app.listen(port, () => {
-	console.log(`server is listening on port ${port}`);
-});
+if (connectedToDB)
+	app.listen(port, () => {
+		console.log(`server is listening on port ${port}`);
+	});

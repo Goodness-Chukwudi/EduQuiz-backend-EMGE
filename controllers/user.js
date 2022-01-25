@@ -1,4 +1,4 @@
-const { getUser, saveUser } = require("../model/storage/user"),
+const { getUser, saveUser } = require("../service/data/user"),
 	Token = require("../utils/token"),
 	cookie = require("cookie"),
 	User = require("../model/user"),
@@ -41,7 +41,7 @@ const logout = (req, res) => {
 	res.setHeader(
 		"Set-Cookie",
 		cookie.serialize("eduQuiz-sessionCookie-content", "", {
-			httpOnly: false,
+			httpOnly: true,
 			sameSite: "none",
 			secure: true,
 			maxAge: 1,
@@ -62,7 +62,7 @@ async function setCookie(res, user) {
 	res.setHeader(
 		"Set-Cookie",
 		cookie.serialize("eduQuiz-sessionCookie-content", token, {
-			httpOnly: false,
+			httpOnly: true,
 			sameSite: "none",
 			secure: true,
 			maxAge: 60 * 60 * 1000,
