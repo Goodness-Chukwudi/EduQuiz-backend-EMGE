@@ -45,21 +45,16 @@ process.on("uncaughtException", (err) => {
 });
 
 // Connect to DB
-let connectedToDB = false;
-mongoose
-	.connect(process.env.DB_CONNECTION_STRING, {
+try {
+	mongoose.connect(process.env.DB_CONNECTION_STRING, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-	})
-	.then((result) => {
-		connectedToDB = result;
-	})
-	.catch((error) => {
-		console.log(error);
 	});
+} catch (error) {
+	console.log(error);
+}
 
 const port = process.env.PORT || 5500;
-if (connectedToDB)
-	app.listen(port, () => {
-		console.log(`server is listening on port ${port}`);
-	});
+app.listen(port, () => {
+	console.log(`server is listening on port ${port}`);
+});
