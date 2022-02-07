@@ -51,7 +51,7 @@ function manageQuiz(quizList) {
 		}
 	});
 
-	RunQuiz.activeQuizzes = quizList;
+	QuizRunner.activeQuizzes = quizList;
 	endQuiz();
 }
 
@@ -59,7 +59,7 @@ function endQuiz() {
 	let answers = [];
 	if (completedQuiz.size > 0) {
 		completedQuiz.forEach((quiz, userId) => {
-			RunQuiz.activeQuizzes.delete(userId);
+			QuizRunner.activeQuizzes.delete(userId);
 			// compute and save result
 			getAnswers(quiz.quizId).then((val) => {
 				answers = val;
@@ -68,7 +68,7 @@ function endQuiz() {
 		});
 		completedQuiz = new Map();
 	}
-	manageTime(RunQuiz.activeQuizzes);
+	manageTime(QuizRunner.activeQuizzes);
 }
 
 module.exports = new QuizRunner();
