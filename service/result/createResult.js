@@ -1,6 +1,6 @@
 "ue strict";
 
-const { saveResult } = require("../service/data/result");
+const { saveResult } = require("../data/result");
 
 const createResult = async (quiz) => {
 	for (let i = 0; i < quiz.questions.length; i++) {
