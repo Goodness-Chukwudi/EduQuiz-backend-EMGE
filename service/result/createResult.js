@@ -2,7 +2,7 @@
 
 const { saveResult } = require("../service/data/result");
 
-const createResult = (quiz) => {
+const createResult = async (quiz) => {
 	for (let i = 0; i < quiz.questions.length; i++) {
 		quiz.questions[i].answer = "";
 	}
