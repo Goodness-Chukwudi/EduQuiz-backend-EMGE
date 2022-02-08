@@ -6,7 +6,12 @@ const corsSettings = () => {
 	const corsOptions = {
 		origin: "https://eduquiz.netlify.app",
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
-		allowedHeaders: ["Date", "Content-Type", "Origin"],
+		allowedHeaders: [
+			"Date",
+			"Content-Type",
+			"Origin",
+			"Access-Control-Allow-Origin",
+		],
 		credentials: true,
 		optionSuccessStatus: 200,
 	};
