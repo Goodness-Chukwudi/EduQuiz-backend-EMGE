@@ -12,6 +12,9 @@ const register = async (req, res) => {
 
 	//generate token and send as cookie
 	res = await setCookie(res, user);
+	//send back user without password
+	user.password = "";
+	res.status(200).send(user);
 };
 
 const login = async (req, res) => {

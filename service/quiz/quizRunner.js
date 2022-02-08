@@ -59,7 +59,9 @@ function endQuiz() {
 	let answers = [];
 	if (completedQuiz.size > 0) {
 		completedQuiz.forEach((quiz, userId) => {
-			QuizRunner.activeQuizzes.delete(userId);
+			console.log(QuizRunner.activeQuizzes);
+			if (QuizRunner.activeQuizzes)
+				QuizRunner.activeQuizzes.delete(userId);
 			// compute and save result
 			getAnswers(quiz.quizId).then((val) => {
 				answers = val;
