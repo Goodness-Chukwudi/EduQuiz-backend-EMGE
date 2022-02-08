@@ -35,7 +35,8 @@ async function getUser(id) {
 	return await User.findOne({ userId: id });
 }
 
-async function saveUser(user) {
+async function saveUser(userObject) {
+	const user = new User(userObject);
 	return await user.save();
 }
 

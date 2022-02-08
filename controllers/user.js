@@ -6,20 +6,12 @@ const { getUser, saveUser } = require("../service/data/user"),
 	bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
-	let existingUser = await getUser(req.body.userId);
-	if (existingUser) return res.status(400).send("This user already exist!");
-
 	// Create and save user
 	req.body.password = await hash(req.body.password);
-	let user = new User(req.body);
-	user = await saveUser(user);
+	let user = await saveUser(req.body);
 
 	//generate token and send as cookie
 	res = await setCookie(res, user);
-
-	//send back user without password
-	user.password = "";
-	res.status(200).send(user);
 };
 
 const login = async (req, res) => {
@@ -31,7 +23,6 @@ const login = async (req, res) => {
 
 	//generate token and send as cookie
 	res = await setCookie(res, user);
-
 	//send back user without password
 	user.password = "";
 	res.status(200).send(user);
