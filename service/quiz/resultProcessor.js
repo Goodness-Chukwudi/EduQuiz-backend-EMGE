@@ -14,7 +14,7 @@ function computeResult(result, answers, userId) {
 
 	//Save the updated result and add the result id to the user info
 	saveResult(result).then(() => {
-		/*add the result id to user details*/
+		//add the result id to user details
 		updateResultList(result, userId);
 	});
 }
